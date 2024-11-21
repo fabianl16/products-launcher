@@ -78,3 +78,15 @@ services:
       - SUCCESS_URL=${SUCCESS_URL}
       - CANCEL_URL=${CANCEL_URL}
       - STRIPE_ENDPOINTSECRET=${STRIPE_ENDPOINTSECRET}
+  
+#Authentication
+  auth-ms:
+    build: ./auth-ms
+    volumes:
+      - ./auth-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3007
+      - NATS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=${AUTH_DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
